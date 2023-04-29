@@ -172,7 +172,7 @@ const PricingTablePage = () => {
 												onClick={() => {
 													const promesa = stripeSubscription();
 													promesa.then((value) => {
-														console.log(value.url);
+														window.open(value.url, '_self')
 													})
 													
 												}}>
