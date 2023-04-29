@@ -8,6 +8,7 @@ import Logo from '../../assets/logos/domusLogoLogin.png';
 import Modal, { ModalBody, ModalHeader, ModalTitle } from '../../components/bootstrap/Modal';
 import Spinner from '../../components/bootstrap/Spinner';
 import { priceFormat } from '../../helpers/helpers';
+import stripeSubscription from '../../stripeSubscription';
 
 /**
  * Style
@@ -169,7 +170,11 @@ const PricingTablePage = () => {
 												className='w-100 py-3 text-uppercase'
 												size='lg'
 												onClick={() => {
-													setModalStatus(true);
+													const promesa = stripeSubscription();
+													promesa.then((value) => {
+														console.log(value.url);
+													})
+													
 												}}>
 												CONTINUAR CON EL PAGO
 											</Button>
