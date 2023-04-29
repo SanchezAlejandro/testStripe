@@ -1,23 +1,21 @@
-const STRIPE_SECRET_KEY = 'sk_test_51N1FLPCOgPvEYncJAisjjJgucQj6naxPMsj7AcafXHo5GcLtuWvXLfL7NNktHjKEr7GMubyVFPHQ8FOCp8XbXP5v00VPChIHzU'
-const STRIPE_PRODUCT_PRICE_ID = "price_1N1FcsCOgPvEYncJlNQ5Xe4B"
-const stripe = require ( "stripe" ) ( STRIPE_SECRET_KEY );
+const stripe = require ( "stripe" ) ( process.env.REACT_APP_STRIPE_SECRET_KEY );
+
+const productID = process.env.REACT_APP_STRIPE_PRODUCT_PRICE_ID;
 
 
 
-const productID = STRIPE_PRODUCT_PRICE_ID;
-
-const stripeSubscription = async () => {
+const stripeSubscription = async (condoInfo) => {
     const session = await stripe.checkout.sessions.create({
         line_items: [
             {// Producto 1:
                 price: productID,
-                quantity: 1
+                quantity: condoInfo.houses
             }
         ],
         payment_method_types: [
             "card"
         ],
-        mode: "payment",
+        mode: "subscription",
         success_url: `http://localhost:3005/success`,
         cancel_url: `http://localhost:3005?cancelled=true`
     })
@@ -25,5 +23,3 @@ const stripeSubscription = async () => {
 }
 
 export default stripeSubscription;
-
-

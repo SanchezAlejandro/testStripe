@@ -32,7 +32,7 @@ const PricingTablePage = () => {
 	const condoInfo = {
 		name: 'Jupiter',
 		cost: 1200,
-		houses: 20,
+		houses: 490,
 	};
 
 	const onClickPremiumPackage = (e) => {
@@ -170,9 +170,10 @@ const PricingTablePage = () => {
 												className='w-100 py-3 text-uppercase'
 												size='lg'
 												onClick={() => {
-													const promesa = stripeSubscription();
-													promesa.then((value) => {
-														window.open(value.url, '_self')
+													const returnedPromise = stripeSubscription(condoInfo);
+													
+													returnedPromise.then((stripeSubsObject) => {
+														window.open(stripeSubsObject.url, '_self');
 													})
 													
 												}}>
