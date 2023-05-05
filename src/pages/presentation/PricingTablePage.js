@@ -32,7 +32,7 @@ const PricingTablePage = () => {
 	const condoInfo = {
 		name: 'Jupiter',
 		cost: 1200,
-		houses: 490,
+		houses: 250,
 	};
 
 	const onClickPremiumPackage = (e) => {
